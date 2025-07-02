@@ -32,7 +32,5 @@ export class Products {
     @ManyToOne(() => Users, (user) => user.products, { onDelete: 'CASCADE' })
     @JoinColumn({ name: 'created_by' })
     created_by: Users;
-
-
 }
 

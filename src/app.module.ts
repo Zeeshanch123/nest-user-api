@@ -12,7 +12,7 @@ import { Products } from './product/entity/product.entity';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal: true, // Make config accessible in all modules
+      isGlobal: true,
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -24,8 +24,8 @@ import { Products } from './product/entity/product.entity';
         username: config.get<string>('DB_USER'),
         password: config.get<string>('DB_PASSWORD'),
         database: config.get<string>('DB_NAME'),
-        synchronize: false, // ✅Set to false in production level for end user as for clients || use migrations in real world
-        // synchronize: true, // Set to true in development level for developers;
+        // synchronize: false, // ✅Set to false in production level for end user as for clients || use migrations in real world
+        synchronize: true, // Set to true in development level for developers;
         autoLoadEntities: true,
         entities: [__dirname + '/**/*.entity{.ts,.js}'], // it works
         // entities: [Users, Products], // it works

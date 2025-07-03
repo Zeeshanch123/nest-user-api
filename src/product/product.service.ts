@@ -53,11 +53,11 @@ export class ProductService {
 
     async update(id: string, updateDto: UpdateProductDto): Promise<NormalResponse<Products | null>> {
         try {
-            const product = await this.productRepo.findOne({ where: { id }, relations: ['created_by'] });
-            if (!product) throw new NotFoundException('Product not found');
-
-            Object.assign(product, updateDto);
-            const updatedProduct = await this.productRepo.save(product);
+            const updateResult = await this.productRepo.update(id, updateDto);
+            if (updateResult.affected === 0) {
+                throw new NotFoundException('Product not found');
+            }
+            const updatedProduct = await this.productRepo.findOne({ where: { id }, relations: ['created_by'] });
             return customResponseHandler(updatedProduct, 'Product updated successfully');
         } catch (err) {
             throw new BadRequestException(err.message);

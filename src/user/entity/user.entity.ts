@@ -17,7 +17,7 @@ export class Users {
     // @Column({ length: 100, nullable: true })
     // caste: string;
 
-    @Column({ unique: true })
+    @Column({ unique: true, nullable: false })
     email: string;
 
     @CreateDateColumn()
